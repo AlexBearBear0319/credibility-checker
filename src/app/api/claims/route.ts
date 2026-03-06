@@ -14,8 +14,10 @@ export async function GET() {
     return NextResponse.json({ success: true, data });
   } catch (error) {
     console.error("Database Error:", error);
+    // Return detailed error for debugging
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { success: false, error: "Failed to fetch data" },
+      { success: false, error: "Failed to fetch data", details: errorMessage },
       { status: 500 },
     );
   }
